@@ -12,12 +12,11 @@ const studentSlice = createSlice({
     initialState,
     reducers: {
             addStudent: (state,action) => {
-                state.Students.push(action.payload);
-            },
-            removeStudent: (state,action) => {
-                state.Students = state.Students.filter(
-                    (Students) => Students.id !== action.payload
-                );
+                const objstudent = {
+                    id: nanoid(),
+                    text: action.payload,
+                  };
+                state.Students.push(objstudent.payload);
             },
     },
 });
