@@ -7,17 +7,17 @@ const Navbar = () => {
     <nav>
       <ul>
         <li>
-          <NavLink to="/" activeStyle={{ fontWeight: 'bold', color: 'blue' }}>
+          <NavLink to="/">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/contact" activeStyle={{ fontWeight: 'bold', color: 'blue' }}>
+          <NavLink to="/contact">
             Contact
           </NavLink>
         </li>
         <li>
-          <NavLink to="/student" activeStyle={{ fontWeight: 'bold', color: 'blue' }}>
+          <NavLink to="/student">
             Student
           </NavLink>
         </li>

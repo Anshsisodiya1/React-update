@@ -1,0 +1,118 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  /* Container for form and table */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Button Styles */
+  button, .MuiButton-root {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover, .MuiButton-root:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Form Styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  input, .MuiTextField-root {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  input:focus, .MuiTextField-root:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  input::placeholder, .MuiTextField-root .MuiInputBase-input::placeholder {
+    color: #888;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  th {
+    background-color: #007BFF;
+    color: white;
+  }
+  
+  td {
+    background-color: #f9f9f9;
+  }
+  
+  td button {
+    margin: 5px;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  td button:nth-child(1) {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  td button:nth-child(2) {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  td button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    table, th, td {
+      font-size: 12px;
+    }
+  
+    input, .MuiTextField-root {
+      font-size: 12px;
+    }
+  }
+  
