@@ -29,7 +29,7 @@ const studentSlice = createSlice({
 
       if (studentIndex !== -1) {
         state.students[studentIndex] = {
-          id, // Keep the same ID
+          id, 
           name,
           course,
           age,

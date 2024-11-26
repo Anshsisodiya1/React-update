@@ -11,8 +11,14 @@ import {
   Paper,
   Button,
   TextField,
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
 } from "@mui/material";
-import './Student.css'
+import CloseIcon from "@mui/icons-material/Close";
+import "./Student.css";
 
 const Student = () => {
   const dispatch = useDispatch();
@@ -26,7 +32,7 @@ const Student = () => {
   });
 
   const [editingStudent, setEditingStudent] = useState(null);
-  const [showForm, setShowForm] = useState(false); // State to control form visibility
+  const [showForm, setShowForm] = useState(false);
 
   const handleChange = (e) => {
     setStudentData({
@@ -39,55 +45,67 @@ const Student = () => {
     e.preventDefault();
     if (studentData.name && studentData.course && studentData.age && studentData.Batch) {
       if (editingStudent) {
-        // Edit the student if we are in editing mode
         dispatch(editStudent({ ...studentData, id: editingStudent.id }));
-        setEditingStudent(null); // Reset editing state
+        setEditingStudent(null);
       } else {
-        // Add new student
         dispatch(addStudent(studentData));
       }
       setStudentData({ name: "", course: "", age: "", Batch: "" });
-      setShowForm(false); // Hide the form after submission
+      setShowForm(false);
     }
   };
 
   const handleEdit = (student) => {
     setStudentData(student);
     setEditingStudent(student);
-    setShowForm(true); // Show form when editing
+    setShowForm(true);
   };
 
   const handleDelete = (id) => {
     dispatch(deleteStudent(id));
   };
 
+  const handleClose = () => {
+    setShowForm(false);
+    setEditingStudent(null);
+    setStudentData({ name: "", course: "", age: "", Batch: "" });
+  };
+
   return (
     <>
-      {/* Toggle button for adding a new student */}
-      {!showForm && (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setShowForm(true)}
-        >
-          Add Student
-        </Button>
-      )}
+      {/* Button to open the form */}
+      <Button variant="contained" color="primary" onClick={() => setShowForm(true)}>
+        Add Student
+      </Button>
 
-      {/* Conditional rendering for the form */}
-      {showForm && (
-        <form onSubmit={handleSubmit}>
+      {/* Full-screen Dialog */}
+      <Dialog fullScreen open={showForm} onClose={handleClose}>
+        <AppBar sx={{ position: "relative" }}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ flex: 1 }} variant="h6" component="div">
+              {editingStudent ? "Edit Student" : "Add Student"}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <form onSubmit={handleSubmit} style={{ padding: "20px" }} className="form-container" >
           <TextField
             label="Name"
             name="name"
             value={studentData.name}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
           <TextField
             label="Course"
             name="course"
             value={studentData.course}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
           <TextField
             label="Age"
@@ -95,39 +113,34 @@ const Student = () => {
             name="age"
             value={studentData.age}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
           <TextField
-            label="Batch"
+            // label="Batch"
             name="Batch"
             type="month"
             value={studentData.Batch}
             onChange={handleChange}
+            fullWidth
+            margin="normal"
           />
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" color="primary" fullWidth style={{ marginTop: "20px" }}>
             {editingStudent ? "Update Student" : "Add Student"}
           </Button>
         </form>
-      )}
+      </Dialog>
 
-      <TableContainer component={Paper} style={{ maxWidth: 600, margin: "auto" }}>
+      {/* Student Table */}
+      <TableContainer component={Paper} style={{ maxWidth: 600, margin: "auto", marginTop: "20px" }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                <strong>Name</strong>
-              </TableCell>
-              <TableCell align="right">
-                <strong>Age</strong>
-              </TableCell>
-              <TableCell align="right">
-                <strong>Course</strong>
-              </TableCell>
-              <TableCell align="right">
-                <strong>Batch</strong>
-              </TableCell>
-              <TableCell align="center">
-                <strong>Actions</strong>
-              </TableCell>
+              <TableCell><strong>Name</strong></TableCell>
+              <TableCell align="right"><strong>Age</strong></TableCell>
+              <TableCell align="right"><strong>Course</strong></TableCell>
+              <TableCell align="right"><strong>Batch</strong></TableCell>
+              <TableCell align="center"><strong>Actions</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
